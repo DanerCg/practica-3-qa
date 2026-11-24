@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5.1 (Python 3.14.3 on win32)" generated="2026-11-24T00:00:04.711254" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\tests">
+<suite id="s1-s1" name="Busqueda Productos" source="C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\tests\busqueda_productos.robot">
+<test id="s1-s1-t1" name="Busqueda De Producto Devuelve Resultados Correctos" line="12">
+<kw name="Abrir Navegador En" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:05.184140" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/products'.</msg>
+<arg>${BASE_URL}${ruta}</arg>
+<arg>${BROWSER}</arg>
+<arg>options=${CHROME_OPTIONS}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-24T00:00:05.183835" elapsed="3.898264"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2026-11-24T00:00:09.082383" elapsed="0.001553"/>
+</kw>
+<kw name="Aceptar Cookies Si Aparecen" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.304710" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-11-24T00:00:12.305002" level="FAIL">Element 'css:button.fc-cta-consent' not visible after 3 seconds.</msg>
+<arg>css:button.fc-cta-consent</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" start="2026-11-24T00:00:09.086057" elapsed="3.222318">Element 'css:button.fc-cta-consent' not visible after 3 seconds.</status>
+</kw>
+<msg time="2026-11-24T00:00:12.308590" level="INFO">${aparece} = False</msg>
+<var>${aparece}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>css:button.fc-cta-consent</arg>
+<arg>3s</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-24T00:00:09.085241" elapsed="3.223383"/>
+</kw>
+<if>
+<branch type="IF" condition="${aparece}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>css:button.fc-cta-consent</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:12.309006" elapsed="0.000039"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:12.308754" elapsed="0.000364"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:12.308717" elapsed="0.000474"/>
+</if>
+<doc>Acepta el aviso de cookies del sitio si aparece.</doc>
+<status status="PASS" start="2026-11-24T00:00:09.084690" elapsed="3.224620"/>
+</kw>
+<kw name="Quitar Anuncios" owner="common">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.310256" level="INFO">Executing JavaScript:
+document.querySelectorAll('ins.adsbygoogle, iframe[id^="aswift"], iframe[id^="google_ads"]').forEach(function(e){e.remove();});
+Without any arguments.</msg>
+<arg>document.querySelectorAll('ins.adsbygoogle, iframe[id^="aswift"], iframe[id^="google_ads"]').forEach(function(e){e.remove();});</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.310010" elapsed="0.009910"/>
+</kw>
+<doc>Elimina del DOM los bloques de anuncios que pueden tapar botones.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.309603" elapsed="0.010863"/>
+</kw>
+<kw name="Cerrar Pestanas Extra" owner="common">
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.324002" level="INFO">${ventanas} = ['EE04411762E20B6A067D3B95C931DA6B']</msg>
+<var>${ventanas}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.321375" elapsed="0.002696"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-24T00:00:12.324988" level="INFO">Length is 1.</msg>
+<msg time="2026-11-24T00:00:12.325094" level="INFO">${cantidad} = 1</msg>
+<var>${cantidad}</var>
+<arg>${ventanas}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.324349" elapsed="0.000778"/>
+</kw>
+<if>
+<branch type="IF" condition="${cantidad} &gt; 1">
+<kw name="Get Slice From List" owner="Collections">
+<var>${extras}</var>
+<arg>${ventanas}</arg>
+<arg>1</arg>
+<doc>Returns a slice of the given list between `start` and `end` indices.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:12.325622" elapsed="0.000036"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventana}</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:12.326097" elapsed="0.000059"/>
+</kw>
+<kw name="Close Window" owner="SeleniumLibrary">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:12.326339" elapsed="0.000031"/>
+</kw>
+<var name="${ventana}"/>
+<status status="NOT RUN" start="2026-11-24T00:00:12.325868" elapsed="0.000553"/>
+</iter>
+<var>${ventana}</var>
+<value>@{extras}</value>
+<status status="NOT RUN" start="2026-11-24T00:00:12.325751" elapsed="0.000734"/>
+</for>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventanas}[0]</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:12.326700" elapsed="0.000029"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:12.325296" elapsed="0.001476"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:12.325252" elapsed="0.001568"/>
+</if>
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.320980" elapsed="0.005913"/>
+</kw>
+<arg>/products</arg>
+<doc>Abre el navegador en una ruta del sitio y lo deja listo para interactuar.</doc>
+<status status="PASS" start="2026-11-24T00:00:05.182506" elapsed="7.144454"/>
+</kw>
+<kw name="Validar Pagina De Productos" owner="productos">
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.332658" level="INFO">Page title is 'Automation Exercise - All Products'.</msg>
+<arg>${TITULO_PRODUCTOS}</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.327691" elapsed="0.005065"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.370679" level="INFO">Element 'id:search_product' is displayed.</msg>
+<arg>${BUSCAR_CAJA}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.332986" elapsed="0.037788"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.376820" level="INFO">Current page contains element 'id:submit_search'.</msg>
+<arg>${BUSCAR_BOTON}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.370950" elapsed="0.005987"/>
+</kw>
+<doc>Comprueba que se cargo la pagina de productos con su buscador.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.327362" elapsed="0.049685"/>
+</kw>
+<kw name="Buscar Producto" owner="productos">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.378101" level="INFO">Typing text 'Tshirt' into text field 'id:search_product'.</msg>
+<arg>${BUSCAR_CAJA}</arg>
+<arg>${termino}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.377807" elapsed="0.065357"/>
+</kw>
+<kw name="Clic Seguro" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:12.444684" level="INFO">Clicking element 'id:submit_search'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.444428" elapsed="1.183778"/>
+</kw>
+<msg time="2026-11-24T00:00:13.628404" level="INFO">${ok} = True</msg>
+<var>${ok}</var>
+<arg>Click Element</arg>
+<arg>${locator}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.443945" elapsed="1.184496"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${ok}">
+<kw name="Quitar Anuncios" owner="common">
+<doc>Elimina del DOM los bloques de anuncios que pueden tapar botones.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.628980" elapsed="0.000050"/>
+</kw>
+<kw name="Cerrar Pestanas Extra" owner="common">
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.629324" elapsed="0.000034"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.629590" elapsed="0.000045"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.629847" elapsed="0.000048"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:13.628579" elapsed="0.001370"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:13.628541" elapsed="0.001482"/>
+</if>
+<arg>${BUSCAR_BOTON}</arg>
+<doc>Hace clic en un elemento; si un anuncio lo tapa, limpia la pagina y reintenta.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.443495" elapsed="1.186634"/>
+</kw>
+<arg>${TERMINO_BUSQUEDA}</arg>
+<doc>Escribe un termino en el buscador y pulsa buscar.</doc>
+<status status="PASS" start="2026-11-24T00:00:12.377407" elapsed="1.252797"/>
+</kw>
+<kw name="Validar Resultados De Busqueda" owner="productos">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${BUSCAR_TITULO}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.631018" elapsed="0.014506"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:13.652447" level="INFO">Current page contains element 'xpath=//div[contains(@class,'features_items')]/h2[contains(translate(., 'SEARCHED PRODUCTS', 'searched products'), 'searched products')]'.</msg>
+<arg>xpath=//div[contains(@class,'features_items')]/h2[contains(translate(., 'SEARCHED PRODUCTS', 'searched products'), 'searched products')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.645716" elapsed="0.006825"/>
+</kw>
+<kw name="Get WebElements" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:13.659152" level="INFO">${productos} = [&lt;selenium.webdriver.remote.webelement.WebElement (session="5a18ab54250a170a21d261f0a3ae3f03", element="f.EE04411762E20B6A067D3B95C931DA6B.d.FE08C4C9945766792DA252CAA8F52C35.e.815")&gt;, &lt;selenium.webdri...</msg>
+<var>${productos}</var>
+<arg>${BUSCAR_NOMBRES}</arg>
+<doc>Returns a list of WebElement objects matching the ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.652700" elapsed="0.006544"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-24T00:00:13.659910" level="INFO">Length is 6.</msg>
+<msg time="2026-11-24T00:00:13.660004" level="INFO">${cantidad} = 6</msg>
+<var>${cantidad}</var>
+<arg>${productos}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.659550" elapsed="0.000477"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${cantidad} &gt; 0</arg>
+<arg>La busqueda no devolvio productos</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.660176" elapsed="0.000533"/>
+</kw>
+<kw name="Page Should Contain Element" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:13.721717" level="INFO">Current page contains element 'xpath=//div[contains(@class,'productinfo')]/p[contains(translate(., 'SHIRT', 'shirt'), 'shirt')]'.</msg>
+<arg>xpath=//div[contains(@class,'productinfo')]/p[contains(translate(., 'SHIRT', 'shirt'), '${palabra}')]</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.660901" elapsed="0.060917"/>
+</kw>
+<kw name="Location Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:13.726370" level="INFO">Current location contains 'search=Tshirt'.</msg>
+<arg>search=${termino}</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.721993" elapsed="0.004569"/>
+</kw>
+<arg>${TERMINO_BUSQUEDA}</arg>
+<arg>${PALABRA_ESPERADA}</arg>
+<doc>Comprueba que hay resultados y que corresponden al criterio buscado.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.630638" elapsed="0.096131"/>
+</kw>
+<kw name="Capturar Pantalla" owner="common">
+<kw name="Cerrar Pestanas Extra" owner="common">
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:13.735471" level="INFO">${ventanas} = ['EE04411762E20B6A067D3B95C931DA6B']</msg>
+<var>${ventanas}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.728676" elapsed="0.006861"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-24T00:00:13.736352" level="INFO">Length is 1.</msg>
+<msg time="2026-11-24T00:00:13.736504" level="INFO">${cantidad} = 1</msg>
+<var>${cantidad}</var>
+<arg>${ventanas}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.735811" elapsed="0.000726"/>
+</kw>
+<if>
+<branch type="IF" condition="${cantidad} &gt; 1">
+<kw name="Get Slice From List" owner="Collections">
+<var>${extras}</var>
+<arg>${ventanas}</arg>
+<arg>1</arg>
+<doc>Returns a slice of the given list between `start` and `end` indices.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.737133" elapsed="0.000043"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventana}</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.737654" elapsed="0.000050"/>
+</kw>
+<kw name="Close Window" owner="SeleniumLibrary">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.737846" elapsed="0.000029"/>
+</kw>
+<var name="${ventana}"/>
+<status status="NOT RUN" start="2026-11-24T00:00:13.737413" elapsed="0.000508"/>
+</iter>
+<var>${ventana}</var>
+<value>@{extras}</value>
+<status status="NOT RUN" start="2026-11-24T00:00:13.737283" elapsed="0.000704"/>
+</for>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventanas}[0]</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.738207" elapsed="0.000033"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:13.736701" elapsed="0.001589"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:13.736659" elapsed="0.001683"/>
+</if>
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.728246" elapsed="0.010174"/>
+</kw>
+<kw name="Normalize Path" owner="OperatingSystem">
+<msg time="2026-11-24T00:00:13.738859" level="INFO">${carpeta} = C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots</msg>
+<var>${carpeta}</var>
+<arg>${SCREENSHOT_DIR}</arg>
+<doc>Normalizes the given path.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.738579" elapsed="0.000322"/>
+</kw>
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-11-24T00:00:13.739300" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots"&gt;C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots&lt;/a&gt;' already exists.</msg>
+<arg>${carpeta}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.739074" elapsed="0.000298"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:13.852597" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../screenshots/ej3_busqueda_productos.png"&gt;&lt;img src="../screenshots/ej3_busqueda_productos.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${carpeta}${/}${nombre}.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.739563" elapsed="0.113177"/>
+</kw>
+<arg>ej3_busqueda_productos</arg>
+<doc>Guarda una captura de pantalla en la carpeta screenshots/.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.727454" elapsed="0.125552"/>
+</kw>
+<kw name="Cerrar Navegador" owner="common" type="TEARDOWN">
+<if>
+<branch type="IF" condition="'${TEST STATUS}' == 'FAIL'">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<arg>Capturar Pantalla De Fallo</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:13.854541" elapsed="0.000064"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:13.854158" elapsed="0.000531"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:13.854116" elapsed="0.000645"/>
+</if>
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.854948" elapsed="2.277111"/>
+</kw>
+<doc>Teardown: si la prueba fallo guarda una captura y cierra el navegador.</doc>
+<status status="PASS" start="2026-11-24T00:00:13.853713" elapsed="2.278540"/>
+</kw>
+<doc>Valida la pagina de productos, el titulo de resultados, que haya productos
+y que alguno corresponda al criterio buscado.</doc>
+<tag>busqueda</tag>
+<tag>productos</tag>
+<status status="PASS" start="2026-11-24T00:00:05.181201" elapsed="10.951415"/>
+</test>
+<doc>Ejercicio 3 - Busqueda de productos: se ingresa a la seccion de productos,
+se realiza una busqueda y se valida que los resultados sean correctos.</doc>
+<status status="PASS" start="2026-11-24T00:00:04.755414" elapsed="11.378086"/>
+</suite>
+<suite id="s1-s2" name="Login Incorrecto" source="C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\tests\login_incorrecto.robot">
+<test id="s1-s2-t1" name="Login Con Credenciales Invalidas Muestra Error" line="12">
+<kw name="Abrir Navegador En" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:16.148313" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/login'.</msg>
+<arg>${BASE_URL}${ruta}</arg>
+<arg>${BROWSER}</arg>
+<arg>options=${CHROME_OPTIONS}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-24T00:00:16.148104" elapsed="2.653935"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2026-11-24T00:00:18.802300" elapsed="0.001009"/>
+</kw>
+<kw name="Aceptar Cookies Si Aparecen" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:21.984816" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-11-24T00:00:21.985055" level="FAIL">Element 'css:button.fc-cta-consent' not visible after 3 seconds.</msg>
+<arg>css:button.fc-cta-consent</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" start="2026-11-24T00:00:18.804504" elapsed="3.181699">Element 'css:button.fc-cta-consent' not visible after 3 seconds.</status>
+</kw>
+<msg time="2026-11-24T00:00:21.986374" level="INFO">${aparece} = False</msg>
+<var>${aparece}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>css:button.fc-cta-consent</arg>
+<arg>3s</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-24T00:00:18.804018" elapsed="3.182383"/>
+</kw>
+<if>
+<branch type="IF" condition="${aparece}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>css:button.fc-cta-consent</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:21.986665" elapsed="0.000024"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:21.986497" elapsed="0.000223"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:21.986471" elapsed="0.000281"/>
+</if>
+<doc>Acepta el aviso de cookies del sitio si aparece.</doc>
+<status status="PASS" start="2026-11-24T00:00:18.803619" elapsed="3.183187"/>
+</kw>
+<kw name="Quitar Anuncios" owner="common">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:21.987480" level="INFO">Executing JavaScript:
+document.querySelectorAll('ins.adsbygoogle, iframe[id^="aswift"], iframe[id^="google_ads"]').forEach(function(e){e.remove();});
+Without any arguments.</msg>
+<arg>document.querySelectorAll('ins.adsbygoogle, iframe[id^="aswift"], iframe[id^="google_ads"]').forEach(function(e){e.remove();});</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-11-24T00:00:21.987307" elapsed="0.009111"/>
+</kw>
+<doc>Elimina del DOM los bloques de anuncios que pueden tapar botones.</doc>
+<status status="PASS" start="2026-11-24T00:00:21.986981" elapsed="0.009806"/>
+</kw>
+<kw name="Cerrar Pestanas Extra" owner="common">
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:21.999526" level="INFO">${ventanas} = ['2A0F75E8015E465473F99A307C93E93F']</msg>
+<var>${ventanas}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-11-24T00:00:21.997801" elapsed="0.001767"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-24T00:00:22.000077" level="INFO">Length is 1.</msg>
+<msg time="2026-11-24T00:00:22.000144" level="INFO">${cantidad} = 1</msg>
+<var>${cantidad}</var>
+<arg>${ventanas}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-24T00:00:21.999743" elapsed="0.000421"/>
+</kw>
+<if>
+<branch type="IF" condition="${cantidad} &gt; 1">
+<kw name="Get Slice From List" owner="Collections">
+<var>${extras}</var>
+<arg>${ventanas}</arg>
+<arg>1</arg>
+<doc>Returns a slice of the given list between `start` and `end` indices.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.000605" elapsed="0.000042"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventana}</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.001054" elapsed="0.000047"/>
+</kw>
+<kw name="Close Window" owner="SeleniumLibrary">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.001253" elapsed="0.000034"/>
+</kw>
+<var name="${ventana}"/>
+<status status="NOT RUN" start="2026-11-24T00:00:22.000845" elapsed="0.000481"/>
+</iter>
+<var>${ventana}</var>
+<value>@{extras}</value>
+<status status="NOT RUN" start="2026-11-24T00:00:22.000738" elapsed="0.000633"/>
+</for>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventanas}[0]</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.001530" elapsed="0.000045"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:22.000255" elapsed="0.001391"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:22.000232" elapsed="0.001461"/>
+</if>
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="PASS" start="2026-11-24T00:00:21.997299" elapsed="0.004467"/>
+</kw>
+<arg>/login</arg>
+<doc>Abre el navegador en una ruta del sitio y lo deja listo para interactuar.</doc>
+<status status="PASS" start="2026-11-24T00:00:16.147753" elapsed="5.854070"/>
+</kw>
+<kw name="Validar Pagina De Login" owner="login">
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:22.008611" level="INFO">Page title is 'Automation Exercise - Signup / Login'.</msg>
+<arg>${TITULO_LOGIN}</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.002617" elapsed="0.006144"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:22.024204" level="INFO">Element 'xpath=//div[@class='login-form']/h2' is displayed.</msg>
+<arg>${LOGIN_TITULO}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.009001" elapsed="0.015299"/>
+</kw>
+<kw name="Element Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:22.036865" level="INFO">Element 'xpath=//div[@class='login-form']/h2' contains text 'Login to your account'.</msg>
+<arg>${LOGIN_TITULO}</arg>
+<arg>Login to your account</arg>
+<doc>Verifies that element ``locator`` contains text ``expected``.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.024484" elapsed="0.012479"/>
+</kw>
+<doc>Comprueba que se cargo la pagina de login.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.002263" elapsed="0.034792"/>
+</kw>
+<kw name="Ingresar Credenciales" owner="login">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:22.038047" level="INFO">Typing text 'usuario.invalido@correo-falso.com' into text field 'css:input[data-qa='login-email']'.</msg>
+<arg>${LOGIN_EMAIL}</arg>
+<arg>${email}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.037708" elapsed="0.077170"/>
+</kw>
+<kw name="Input Password" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:22.115630" level="INFO">Typing password into text field 'name:password'.</msg>
+<msg time="2026-11-24T00:00:22.136886" level="INFO">Temporally setting log level to: NONE</msg>
+<arg>${LOGIN_PASSWORD}</arg>
+<arg>${clave}</arg>
+<doc>Types the given password into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.115196" elapsed="0.059354"/>
+</kw>
+<kw name="Clic Seguro" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:22.176739" level="INFO">Clicking element 'xpath=//button[@data-qa='login-button']'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.176394" elapsed="0.048162"/>
+</kw>
+<msg time="2026-11-24T00:00:22.224894" level="INFO">${ok} = True</msg>
+<var>${ok}</var>
+<arg>Click Element</arg>
+<arg>${locator}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.175784" elapsed="0.049159"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${ok}">
+<kw name="Quitar Anuncios" owner="common">
+<doc>Elimina del DOM los bloques de anuncios que pueden tapar botones.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.225553" elapsed="0.000057"/>
+</kw>
+<kw name="Cerrar Pestanas Extra" owner="common">
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.225897" elapsed="0.000035"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.226060" elapsed="0.000032"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:22.226207" elapsed="0.000020"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:22.225101" elapsed="0.001155"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:22.225063" elapsed="0.001236"/>
+</if>
+<arg>${LOGIN_BOTON}</arg>
+<doc>Hace clic en un elemento; si un anuncio lo tapa, limpia la pagina y reintenta.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.175128" elapsed="0.051231"/>
+</kw>
+<arg>${EMAIL_INVALIDO}</arg>
+<arg>${CLAVE_INVALIDA}</arg>
+<doc>Escribe correo y contrasena y pulsa Login.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.037367" elapsed="0.189043"/>
+</kw>
+<kw name="Validar Mensaje De Error De Login" owner="login">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${LOGIN_ERROR}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.227235" elapsed="1.028570"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:23.256511" level="INFO">Verifying element 'css:.login-form p[style*='color: red']' contains exact text 'Your email or password is incorrect!'.</msg>
+<arg>${LOGIN_ERROR}</arg>
+<arg>${MENSAJE_ERROR_LOGIN}</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.256096" elapsed="0.010669"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:23.298860" level="INFO">Current page contains text 'Your email or password is incorrect!'.</msg>
+<arg>${MENSAJE_ERROR_LOGIN}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.267011" elapsed="0.031987"/>
+</kw>
+<kw name="Page Should Not Contain" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:23.482519" level="INFO">Current page does not contain text 'Logged in as'.</msg>
+<arg>Logged in as</arg>
+<doc>Verifies the current page does not contain ``text``.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.299226" elapsed="0.183391"/>
+</kw>
+<kw name="Location Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:23.486492" level="INFO">Current location contains '/login'.</msg>
+<arg>/login</arg>
+<doc>Verifies that the current URL contains ``expected``.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.482785" elapsed="0.003839"/>
+</kw>
+<doc>Comprueba que se muestra el error y que no se inicio sesion.</doc>
+<status status="PASS" start="2026-11-24T00:00:22.226804" elapsed="1.259951"/>
+</kw>
+<kw name="Capturar Pantalla" owner="common">
+<kw name="Cerrar Pestanas Extra" owner="common">
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:23.489491" level="INFO">${ventanas} = ['2A0F75E8015E465473F99A307C93E93F']</msg>
+<var>${ventanas}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.487909" elapsed="0.001623"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-24T00:00:23.490246" level="INFO">Length is 1.</msg>
+<msg time="2026-11-24T00:00:23.490321" level="INFO">${cantidad} = 1</msg>
+<var>${cantidad}</var>
+<arg>${ventanas}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.489849" elapsed="0.000493"/>
+</kw>
+<if>
+<branch type="IF" condition="${cantidad} &gt; 1">
+<kw name="Get Slice From List" owner="Collections">
+<var>${extras}</var>
+<arg>${ventanas}</arg>
+<arg>1</arg>
+<doc>Returns a slice of the given list between `start` and `end` indices.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:23.490637" elapsed="0.000026"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventana}</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:23.490953" elapsed="0.000024"/>
+</kw>
+<kw name="Close Window" owner="SeleniumLibrary">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:23.491050" elapsed="0.000019"/>
+</kw>
+<var name="${ventana}"/>
+<status status="NOT RUN" start="2026-11-24T00:00:23.490804" elapsed="0.000292"/>
+</iter>
+<var>${ventana}</var>
+<value>@{extras}</value>
+<status status="NOT RUN" start="2026-11-24T00:00:23.490736" elapsed="0.000392"/>
+</for>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventanas}[0]</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:23.491249" elapsed="0.000020"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:23.490432" elapsed="0.000867"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:23.490410" elapsed="0.000925"/>
+</if>
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.487695" elapsed="0.003718"/>
+</kw>
+<kw name="Normalize Path" owner="OperatingSystem">
+<msg time="2026-11-24T00:00:23.491749" level="INFO">${carpeta} = C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots</msg>
+<var>${carpeta}</var>
+<arg>${SCREENSHOT_DIR}</arg>
+<doc>Normalizes the given path.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.491537" elapsed="0.000251"/>
+</kw>
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-11-24T00:00:23.492147" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots"&gt;C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots&lt;/a&gt;' already exists.</msg>
+<arg>${carpeta}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.491934" elapsed="0.000281"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:23.567852" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../screenshots/ej2_login_incorrecto.png"&gt;&lt;img src="../screenshots/ej2_login_incorrecto.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${carpeta}${/}${nombre}.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.492405" elapsed="0.075621"/>
+</kw>
+<arg>ej2_login_incorrecto</arg>
+<doc>Guarda una captura de pantalla en la carpeta screenshots/.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.487195" elapsed="0.080966"/>
+</kw>
+<kw name="Cerrar Navegador" owner="common" type="TEARDOWN">
+<if>
+<branch type="IF" condition="'${TEST STATUS}' == 'FAIL'">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<arg>Capturar Pantalla De Fallo</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:23.569146" elapsed="0.000027"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:23.568909" elapsed="0.000306"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:23.568887" elapsed="0.000360"/>
+</if>
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.569320" elapsed="2.204979"/>
+</kw>
+<doc>Teardown: si la prueba fallo guarda una captura y cierra el navegador.</doc>
+<status status="PASS" start="2026-11-24T00:00:23.568639" elapsed="2.205857"/>
+</kw>
+<doc>Valida titulo y formulario de login, el mensaje de error y que no hay sesion.</doc>
+<tag>login</tag>
+<tag>negativo</tag>
+<status status="PASS" start="2026-11-24T00:00:16.147178" elapsed="9.627655"/>
+</test>
+<doc>Ejercicio 2 - Login incorrecto: se intenta iniciar sesion con credenciales
+invalidas y se valida el mensaje de error mostrado por la aplicacion.</doc>
+<status status="PASS" start="2026-11-24T00:00:16.134379" elapsed="9.641058"/>
+</suite>
+<suite id="s1-s3" name="Suscripcion" source="C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\tests\suscripcion.robot">
+<test id="s1-s3-t1" name="Suscripcion Por Correo Muestra Mensaje De Exito" line="12">
+<kw name="Abrir Navegador En" owner="common" type="SETUP">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:25.789593" level="INFO">Opening browser 'chrome' to base url 'https://automationexercise.com/'.</msg>
+<arg>${BASE_URL}${ruta}</arg>
+<arg>${BROWSER}</arg>
+<arg>options=${CHROME_OPTIONS}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-11-24T00:00:25.789391" elapsed="2.453355"/>
+</kw>
+<kw name="Set Selenium Timeout" owner="SeleniumLibrary">
+<arg>${TIMEOUT}</arg>
+<doc>Sets the timeout that is used by various keywords.</doc>
+<status status="PASS" start="2026-11-24T00:00:28.243055" elapsed="0.001278"/>
+</kw>
+<kw name="Aceptar Cookies Si Aparecen" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.493012" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-3.png"&gt;&lt;img src="selenium-screenshot-3.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-11-24T00:00:31.493208" level="FAIL">Element 'css:button.fc-cta-consent' not visible after 3 seconds.</msg>
+<arg>css:button.fc-cta-consent</arg>
+<arg>3s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="FAIL" start="2026-11-24T00:00:28.245788" elapsed="3.249407">Element 'css:button.fc-cta-consent' not visible after 3 seconds.</status>
+</kw>
+<msg time="2026-11-24T00:00:31.495559" level="INFO">${aparece} = False</msg>
+<var>${aparece}</var>
+<arg>Wait Until Element Is Visible</arg>
+<arg>css:button.fc-cta-consent</arg>
+<arg>3s</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-24T00:00:28.245193" elapsed="3.250453"/>
+</kw>
+<if>
+<branch type="IF" condition="${aparece}">
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>css:button.fc-cta-consent</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.496424" elapsed="0.000111"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:31.495925" elapsed="0.000739"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:31.495859" elapsed="0.000914"/>
+</if>
+<doc>Acepta el aviso de cookies del sitio si aparece.</doc>
+<status status="PASS" start="2026-11-24T00:00:28.244703" elapsed="3.252199"/>
+</kw>
+<kw name="Quitar Anuncios" owner="common">
+<kw name="Execute Javascript" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.498308" level="INFO">Executing JavaScript:
+document.querySelectorAll('ins.adsbygoogle, iframe[id^="aswift"], iframe[id^="google_ads"]').forEach(function(e){e.remove();});
+Without any arguments.</msg>
+<arg>document.querySelectorAll('ins.adsbygoogle, iframe[id^="aswift"], iframe[id^="google_ads"]').forEach(function(e){e.remove();});</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.497974" elapsed="0.007241"/>
+</kw>
+<doc>Elimina del DOM los bloques de anuncios que pueden tapar botones.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.497276" elapsed="0.008047"/>
+</kw>
+<kw name="Cerrar Pestanas Extra" owner="common">
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.507554" level="INFO">${ventanas} = ['8E36B05A83EF60B163C8513757B4331A']</msg>
+<var>${ventanas}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.505826" elapsed="0.001816"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-24T00:00:31.508329" level="INFO">Length is 1.</msg>
+<msg time="2026-11-24T00:00:31.508428" level="INFO">${cantidad} = 1</msg>
+<var>${cantidad}</var>
+<arg>${ventanas}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.507875" elapsed="0.000584"/>
+</kw>
+<if>
+<branch type="IF" condition="${cantidad} &gt; 1">
+<kw name="Get Slice From List" owner="Collections">
+<var>${extras}</var>
+<arg>${ventanas}</arg>
+<arg>1</arg>
+<doc>Returns a slice of the given list between `start` and `end` indices.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.508905" elapsed="0.000039"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventana}</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.509321" elapsed="0.000036"/>
+</kw>
+<kw name="Close Window" owner="SeleniumLibrary">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.509472" elapsed="0.000027"/>
+</kw>
+<var name="${ventana}"/>
+<status status="NOT RUN" start="2026-11-24T00:00:31.509130" elapsed="0.000412"/>
+</iter>
+<var>${ventana}</var>
+<value>@{extras}</value>
+<status status="NOT RUN" start="2026-11-24T00:00:31.509033" elapsed="0.000559"/>
+</for>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventanas}[0]</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.509792" elapsed="0.000027"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:31.508581" elapsed="0.001292"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:31.508551" elapsed="0.001368"/>
+</if>
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.505552" elapsed="0.004438"/>
+</kw>
+<arg>/</arg>
+<doc>Abre el navegador en una ruta del sitio y lo deja listo para interactuar.</doc>
+<status status="PASS" start="2026-11-24T00:00:25.788889" elapsed="5.721167"/>
+</kw>
+<kw name="Get Time" owner="BuiltIn">
+<msg time="2026-11-24T00:00:31.511613" level="INFO">${marca} = 1795492831</msg>
+<var>${marca}</var>
+<arg>epoch</arg>
+<doc>Returns the given time in the requested format.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.510405" elapsed="0.001251"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2026-11-24T00:00:31.512184" level="INFO">${correo} = estudiante1795492831@correo.com</msg>
+<var>${correo}</var>
+<arg>estudiante${marca}@correo.com</arg>
+<doc>Returns the given values which can then be assigned to a variable.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.511897" elapsed="0.000313"/>
+</kw>
+<kw name="Validar Bloque De Suscripcion" owner="suscripcion">
+<kw name="Title Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.516645" level="INFO">Page title is 'Automation Exercise'.</msg>
+<arg>${TITULO_HOME}</arg>
+<doc>Verifies that the current page title equals ``title``.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.512641" elapsed="0.004080"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${SUSC_EMAIL}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.516855" elapsed="0.288916"/>
+</kw>
+<kw name="Element Should Be Visible" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.819360" level="INFO">Element 'xpath=//div[@class='single-widget']/h2' is displayed.</msg>
+<arg>${SUSC_TITULO}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.806040" elapsed="0.013406"/>
+</kw>
+<kw name="Get Text" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.831922" level="INFO">${titulo} = SUBSCRIPTION</msg>
+<var>${titulo}</var>
+<arg>${SUSC_TITULO}</arg>
+<doc>Returns the text value of the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.819600" elapsed="0.012375"/>
+</kw>
+<kw name="Convert To Upper Case" owner="String">
+<msg time="2026-11-24T00:00:31.832324" level="INFO">${titulo} = SUBSCRIPTION</msg>
+<var>${titulo}</var>
+<arg>${titulo}</arg>
+<doc>Converts string to upper case.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.832149" elapsed="0.000197"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${titulo}</arg>
+<arg>${TITULO_SUSCRIPCION}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.832465" elapsed="0.000277"/>
+</kw>
+<doc>Baja al pie de pagina y comprueba que existe el bloque SUBSCRIPTION.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.512434" elapsed="0.320370"/>
+</kw>
+<kw name="Suscribir Correo" owner="suscripcion">
+<kw name="Input Text" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.833903" level="INFO">Typing text 'estudiante1795492831@correo.com' into text field 'id:susbscribe_email'.</msg>
+<arg>${SUSC_EMAIL}</arg>
+<arg>${correo}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.833602" elapsed="0.065315"/>
+</kw>
+<kw name="Clic Seguro" owner="common">
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Click Element" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.900336" level="INFO">Clicking element 'id:subscribe'.</msg>
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.900118" elapsed="0.038660"/>
+</kw>
+<msg time="2026-11-24T00:00:31.938975" level="INFO">${ok} = True</msg>
+<var>${ok}</var>
+<arg>Click Element</arg>
+<arg>${locator}</arg>
+<doc>Runs the specified keyword and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.899741" elapsed="0.039272"/>
+</kw>
+<if>
+<branch type="IF" condition="not ${ok}">
+<kw name="Quitar Anuncios" owner="common">
+<doc>Elimina del DOM los bloques de anuncios que pueden tapar botones.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.939458" elapsed="0.000041"/>
+</kw>
+<kw name="Cerrar Pestanas Extra" owner="common">
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.939746" elapsed="0.000034"/>
+</kw>
+<kw name="Scroll Element Into View" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Scrolls the element identified by ``locator`` into view.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.939930" elapsed="0.000031"/>
+</kw>
+<kw name="Click Element" owner="SeleniumLibrary">
+<arg>${locator}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.940122" elapsed="0.000029"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:31.939143" elapsed="0.001049"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:31.939108" elapsed="0.001132"/>
+</if>
+<arg>${SUSC_BOTON}</arg>
+<doc>Hace clic en un elemento; si un anuncio lo tapa, limpia la pagina y reintenta.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.899286" elapsed="0.041026"/>
+</kw>
+<arg>${correo}</arg>
+<doc>Escribe un correo en el bloque de suscripcion y pulsa el boton.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.833179" elapsed="0.107209"/>
+</kw>
+<kw name="Validar Mensaje De Exito De Suscripcion" owner="suscripcion">
+<kw name="Wait Until Element Is Visible" owner="SeleniumLibrary">
+<arg>${SUSC_MENSAJE}</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.941138" elapsed="0.012282"/>
+</kw>
+<kw name="Element Text Should Be" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.953895" level="INFO">Verifying element 'css:#success-subscribe .alert-success' contains exact text 'You have been successfully subscribed!'.</msg>
+<arg>${SUSC_MENSAJE}</arg>
+<arg>${MENSAJE_EXITO_SUSCRIPCION}</arg>
+<doc>Verifies that element ``locator`` contains exact the text ``expected``.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.953606" elapsed="0.010883"/>
+</kw>
+<kw name="Page Should Contain" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.973333" level="INFO">Current page contains text 'You have been successfully subscribed!'.</msg>
+<arg>${MENSAJE_EXITO_SUSCRIPCION}</arg>
+<doc>Verifies that current page contains ``text``.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.964733" elapsed="0.008688"/>
+</kw>
+<doc>Comprueba que aparece el mensaje de exito.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.940821" elapsed="0.032685"/>
+</kw>
+<kw name="Capturar Pantalla" owner="common">
+<kw name="Cerrar Pestanas Extra" owner="common">
+<kw name="Get Window Handles" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:31.976257" level="INFO">${ventanas} = ['8E36B05A83EF60B163C8513757B4331A']</msg>
+<var>${ventanas}</var>
+<doc>Returns all child window handles of the selected browser as a list.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.974810" elapsed="0.001484"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2026-11-24T00:00:31.976811" level="INFO">Length is 1.</msg>
+<msg time="2026-11-24T00:00:31.976915" level="INFO">${cantidad} = 1</msg>
+<var>${cantidad}</var>
+<arg>${ventanas}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.976441" elapsed="0.000514"/>
+</kw>
+<if>
+<branch type="IF" condition="${cantidad} &gt; 1">
+<kw name="Get Slice From List" owner="Collections">
+<var>${extras}</var>
+<arg>${ventanas}</arg>
+<arg>1</arg>
+<doc>Returns a slice of the given list between `start` and `end` indices.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.977235" elapsed="0.000024"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventana}</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.977498" elapsed="0.000023"/>
+</kw>
+<kw name="Close Window" owner="SeleniumLibrary">
+<doc>Closes currently opened and selected browser window/tab.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.977592" elapsed="0.000019"/>
+</kw>
+<var name="${ventana}"/>
+<status status="NOT RUN" start="2026-11-24T00:00:31.977379" elapsed="0.000258"/>
+</iter>
+<var>${ventana}</var>
+<value>@{extras}</value>
+<status status="NOT RUN" start="2026-11-24T00:00:31.977312" elapsed="0.000371"/>
+</for>
+<kw name="Switch Window" owner="SeleniumLibrary">
+<arg>${ventanas}[0]</arg>
+<doc>Switches to browser window matching ``locator``.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:31.977804" elapsed="0.000021"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:31.977044" elapsed="0.000813"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:31.977023" elapsed="0.000865"/>
+</if>
+<doc>Cierra pestanas abiertas por anuncios y vuelve a la principal.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.974561" elapsed="0.003376"/>
+</kw>
+<kw name="Normalize Path" owner="OperatingSystem">
+<msg time="2026-11-24T00:00:31.978175" level="INFO">${carpeta} = C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots</msg>
+<var>${carpeta}</var>
+<arg>${SCREENSHOT_DIR}</arg>
+<doc>Normalizes the given path.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.978031" elapsed="0.000168"/>
+</kw>
+<kw name="Create Directory" owner="OperatingSystem">
+<msg time="2026-11-24T00:00:31.978490" level="INFO" html="true">Directory '&lt;a href="file://C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots"&gt;C:\Users\daner\OneDrive\Escritorio\selenium\practica 3 qa\robot_project\screenshots&lt;/a&gt;' already exists.</msg>
+<arg>${carpeta}</arg>
+<doc>Creates the specified directory.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.978280" elapsed="0.000273"/>
+</kw>
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-11-24T00:00:32.134352" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="../screenshots/ej6_suscripcion.png"&gt;&lt;img src="../screenshots/ej6_suscripcion.png" width="800px"&gt;&lt;/a&gt;</msg>
+<arg>${carpeta}${/}${nombre}.png</arg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.978703" elapsed="0.155757"/>
+</kw>
+<arg>ej6_suscripcion</arg>
+<doc>Guarda una captura de pantalla en la carpeta screenshots/.</doc>
+<status status="PASS" start="2026-11-24T00:00:31.973986" elapsed="0.160579"/>
+</kw>
+<kw name="Cerrar Navegador" owner="common" type="TEARDOWN">
+<if>
+<branch type="IF" condition="'${TEST STATUS}' == 'FAIL'">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<arg>Capturar Pantalla De Fallo</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="NOT RUN" start="2026-11-24T00:00:32.135509" elapsed="0.000023"/>
+</kw>
+<status status="NOT RUN" start="2026-11-24T00:00:32.135318" elapsed="0.000250"/>
+</branch>
+<status status="PASS" start="2026-11-24T00:00:32.135300" elapsed="0.000297"/>
+</if>
+<kw name="Close All Browsers" owner="SeleniumLibrary">
+<doc>Closes all open browsers and resets the browser cache.</doc>
+<status status="PASS" start="2026-11-24T00:00:32.135661" elapsed="2.205962"/>
+</kw>
+<doc>Teardown: si la prueba fallo guarda una captura y cierra el navegador.</doc>
+<status status="PASS" start="2026-11-24T00:00:32.135098" elapsed="2.206660"/>
+</kw>
+<doc>Valida el titulo, el bloque de suscripcion y el mensaje de exito.</doc>
+<tag>suscripcion</tag>
+<status status="PASS" start="2026-11-24T00:00:25.788226" elapsed="8.553811"/>
+</test>
+<doc>Ejercicio 6 - Suscripcion: se registra un correo en el bloque SUBSCRIPTION
+del pie de pagina y se valida el mensaje de exito.</doc>
+<status status="PASS" start="2026-11-24T00:00:25.776032" elapsed="8.566710"/>
+</suite>
+<status status="PASS" start="2026-11-24T00:00:04.712615" elapsed="29.631022"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0" skip="0">busqueda</stat>
+<stat pass="1" fail="0" skip="0">login</stat>
+<stat pass="1" fail="0" skip="0">negativo</stat>
+<stat pass="1" fail="0" skip="0">productos</stat>
+<stat pass="1" fail="0" skip="0">suscripcion</stat>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="3" fail="0" skip="0">Tests</stat>
+<stat name="Busqueda Productos" id="s1-s1" pass="1" fail="0" skip="0">Tests.Busqueda Productos</stat>
+<stat name="Login Incorrecto" id="s1-s2" pass="1" fail="0" skip="0">Tests.Login Incorrecto</stat>
+<stat name="Suscripcion" id="s1-s3" pass="1" fail="0" skip="0">Tests.Suscripcion</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

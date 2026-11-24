@@ -1,0 +1,5 @@
+venv/
+.venv/
+__pycache__/
+screenshots/FALLO_*.png
+selenium-screenshot-*.png
